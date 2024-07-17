@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Web App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Secure Web App</h1>
+    <form id="secureForm">
+        <label for="inputData">Enter some data:</label>
+        <input type="text" id="inputData" name="inputData">
+        <button type="submit">Submit</button>
+    </form>
+    <script src="app.js"></script>
+</body>
+</html>

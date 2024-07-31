@@ -1,5 +1,5 @@
 # securing-data
-Incorporating security measures in HTML using JS
+Incorporating security measures in HTML using JS.
 
 - Generating crypt key and data
 - Securing cookies

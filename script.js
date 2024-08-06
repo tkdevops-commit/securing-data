@@ -112,3 +112,5 @@ document.getElementById('username').addEventListener('input', function() {
         alert('Username cannot exceed ' + maxLength + ' characters');
     }
 });
+
+

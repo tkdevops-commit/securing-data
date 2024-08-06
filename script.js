@@ -37,11 +37,11 @@ secureForm.addEventListener('submit', async (event) => {
     const inputData = document.getElementById('inputData').value;
     const sanitizedData = sanitizeInput(inputData);
 
-    // Generate encrypt key and data
+// Generate encrypt key and data
     const key = await generateKey();
     const encryptedData = await encryptData(sanitizedData, key);
 
-    // Store encrypted data in session
+// Store encrypted data in session
     localStorage.setItem('encryptedData', btoa(String.fromCharCode(...new Uint8Array(encryptedData.encrypted))));
     localStorage.setItem('iv', btoa(String.fromCharCode(...new Uint8Array(encryptedData.iv))));
 });

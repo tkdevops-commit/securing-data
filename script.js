@@ -100,7 +100,15 @@ function escapeHtml(text) {
     });
 }
 
+// Limiting input length 
 let userInput = document.getElementById('userInput').value;
 let escapedInput = escapeHtml(userInput);
 document.getElementById('output').innerText = escapedInput;
 
+document.getElementById('username').addEventListener('input', function() {
+    let maxLength = 20;
+    if (this.value.length > maxLength) {
+        this.value = this.value.slice(0, maxLength);
+        alert('Username cannot exceed ' + maxLength + ' characters');
+    }
+});

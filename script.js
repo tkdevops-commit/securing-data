@@ -83,7 +83,24 @@ function validateForm() {
     return true;
 }
 
+
+// Escaping special cahracters
 document.getElementById('myForm').onsubmit = validateForm;
 
+function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, function (match) {
+        const escapeChars = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        };
+        return escapeChars[match];
+    });
+}
 
+let userInput = document.getElementById('userInput').value;
+let escapedInput = escapeHtml(userInput);
+document.getElementById('output').innerText = escapedInput;
 

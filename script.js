@@ -61,3 +61,29 @@ fetch('https://your-allowed-domain.com/api/data', {
 .then(response => response.json())
 .then(data => console.log(data))
 .catch(error => console.error('Error:', error));
+
+
+// Client-side validation 
+function validateForm() {
+    let email = document.getElementById('email').value;
+    let phone = document.getElementById('phone').value;
+    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let phonePattern = /^[0-9]{10}$/;
+
+    if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address');
+        return false;
+    }
+
+    if (!phonePattern.test(phone)) {
+        alert('Please enter a valid 10-digit phone number');
+        return false;
+    }
+
+    return true;
+}
+
+document.getElementById('myForm').onsubmit = validateForm;
+
+
+

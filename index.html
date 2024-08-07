@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Frame-Options" content="DENY"> <!--Prevents page from displaying in ifram, objects or frames on another website-->
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block"> <!--cross-site scripting filter-->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> <!--CSP restricts soruces from which content can be loaded-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Web App</title>
     <link rel="stylesheet" href="styles.css">

@@ -4,5 +4,6 @@ Incorporating security measures into HTML using JavaScript is crucial for protec
 - Generating crypt key and data
 - Securing cookies
 - Cross origin resource sharing
+- Client-side validation
 - Escaping special characters
 - Limiting character length

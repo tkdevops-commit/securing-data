@@ -113,4 +113,44 @@ document.getElementById('username').addEventListener('input', function() {
     }
 });
 
+const express = require('express');
+const helmet = require('helmet');
+
+const app = express();
+
+// Use Helmet to secure HTTP headers
+app.use(helmet());
+
+// You can customize Helmet’s behavior by enabling or disabling specific headers
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "trusted-cdn.com"],
+            },
+        },
+        referrerPolicy: { policy: 'no-referrer' },
+        xssFilter: true,
+        frameguard: { action: 'deny' },
+        hidePoweredBy: true,
+        hsts: {
+            maxAge: 31536000, // 1 year
+            includeSubDomains: true,
+            preload: true,
+        },
+        noSniff: true,
+        ieNoOpen: true,
+    })
+);
+
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
 

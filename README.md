@@ -7,4 +7,4 @@ Incorporating security measures into HTML using JavaScript is crucial for protec
 - Client-side validation
 - Escaping special characters
 - Limiting character length
-- Securing HTTP headers using Helmet - npm install helmet
+- Securing HTTP headers using Helmet

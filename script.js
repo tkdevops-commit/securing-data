@@ -169,3 +169,76 @@ app.use(
     })
 );
 
+const validateInputLength = (input, maxLength) => {
+    if (input.length > maxLength) {
+        throw new Error(`Input exceeds the maximum length of ${maxLength}`);
+    }
+    return input;
+};
+
+const sanitizeAndValidateInput = (input) => {
+    const sanitizedInput = sanitizeInput(input);
+    return validateInputLength(sanitizedInput, 255); // Set the maxLength based on your needs
+};
+
+const hashData = async (data) => {
+    const encoded = new TextEncoder().encode(data);
+    const hash = await crypto.subtle.digest('SHA-256', encoded);
+    return hash;
+};
+
+const encryptWithHash = async (data, key) => {
+    const hashedData = await hashData(data);
+    return await encryptData(hashedData, key);
+};
+
+const encryptDataWithNonce = async (data, key) => {
+    const nonce = Date.now();
+    const combinedData = `${nonce}:${data}`;
+    const encrypted = await encryptData(combinedData, key);
+    return encrypted;
+};
+
+const wrapKey = async (key, wrappingKey) => {
+    return await crypto.subtle.wrapKey(
+        'jwk',
+        key,
+        wrappingKey,
+        { name: 'AES-GCM', length: 256 }
+    );
+};
+
+fetch('https://your-allowed-domain.com/api/data', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}` // Add token-based authentication for more secure requests
+    },
+    mode: 'cors',
+    credentials: 'same-origin' // Enforces that cookies are only sent for requests from the same domain
+})
+
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'strict-dynamic'", "'sha256-XYZ'"], // Add strict hash-based policy
+                styleSrc: ["'self'", "'sha256-ABC'"], // Use hash-based whitelisting for inline styles
+            },
+        },
+    })
+);
+
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+fetch('https://your-allowed-domain.com/api/data', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'CSRF-Token': csrfToken,
+    },
+    body: JSON.stringify({ data: 'example' }),
+});
+
+document.cookie = "sessionId=your-session-id; Secure; HttpOnly; SameSite=Strict";
+

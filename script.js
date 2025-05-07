@@ -242,3 +242,10 @@ fetch('https://your-allowed-domain.com/api/data', {
 
 document.cookie = "sessionId=your-session-id; Secure; HttpOnly; SameSite=Strict";
 
+if (window.trustedTypes) {
+    const policy = trustedTypes.createPolicy('default', {
+        createHTML: (input) => sanitizeInput(input),
+    });
+    document.getElementById('output').innerHTML = policy.createHTML(userInput);
+}
+
